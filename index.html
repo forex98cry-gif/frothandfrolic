@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Froth & Frolic — Where Comfort Meets Cappuccino</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;700&family=Caveat:wght@400;700&display=swap">
+  <style>
+:root {
+  --cream: #FDF6EC;
+  --warm-white: #FEFAF3;
+  --latte: #D4A574;
+  --espresso: #3C2415;
+  --mocha: #6B4226;
+  --caramel: #C4883A;
+  --sage: #8B9E6B;
+  --deep-sage: #5C6B45;
+  --rose: #C47A7A;
+  --charcoal: #2A2A2A;
+  --soft-gray: #E8E0D5;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-hand: 'Caveat', cursive;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:var(--font-body); background:var(--cream); color:var(--charcoal); overflow-x:hidden; line-height:1.7; }
+
+/* PAGE SECTIONS - hidden by default */
+.page-section { display:none; }
+.page-section.active { display:block; }
+
+/* NAV */
+.navbar { position:fixed; top:0; left:0; width:100%; z-index:1000; padding:1.2rem 3rem; display:flex; justify-content:space-between; align-items:center; transition:all 0.4s ease; }
+.navbar.scrolled { background:rgba(253,246,236,0.95); backdrop-filter:blur(12px); box-shadow:0 2px 30px rgba(60,36,21,0.08); padding:0.8rem 3rem; }
+.nav-logo { font-family:var(--font-display); font-size:1.6rem; font-weight:900; color:var(--espresso); text-decoration:none; letter-spacing:-0.5px; cursor:pointer; }
+.nav-logo span { color:var(--caramel); font-style:italic; }
+.nav-links { display:flex; list-style:none; gap:2.5rem; align-items:center; }
+.nav-links a { text-decoration:none; color:var(--mocha); font-size:0.9rem; font-weight:500; letter-spacing:0.5px; text-transform:uppercase; position:relative; transition:color 0.3s; cursor:pointer; }
+.nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:var(--caramel); transition:width 0.3s ease; }
+.nav-links a:hover::after, .nav-links a.active::after { width:100%; }
+.nav-links a:hover, .nav-links a.active { color:var(--espresso); }
+.nav-cta { background:var(--espresso)!important; color:var(--cream)!important; padding:0.6rem 1.5rem!important; border-radius:50px; font-size:0.85rem!important; transition:all 0.3s ease!important; }
+.nav-cta::after { display:none!important; }
+.nav-cta:hover { background:var(--mocha)!important; transform:translateY(-2px); box-shadow:0 4px 15px rgba(60,36,21,0.3); }
+.hamburger { display:none; flex-direction:column; cursor:pointer; gap:5px; z-index:1001; }
+.hamburger span { width:28px; height:2.5px; background:var(--espresso); border-radius:2px; transition:all 0.3s; }
+
+/* HERO */
+.hero { min-height:100vh; display:flex; align-items:center; position:relative; overflow:hidden; }
+.hero-bg-shape { position:absolute; border-radius:50%; filter:blur(80px); opacity:0.4; z-index:0; }
+.hero-bg-shape.one { width:600px; height:600px; background:var(--latte); top:-200px; right:-100px; }
+.hero-bg-shape.two { width:400px; height:400px; background:var(--sage); bottom:-100px; left:-100px; }
+.hero-bg-shape.three { width:300px; height:300px; background:var(--rose); top:50%; left:50%; transform:translate(-50%,-50%); opacity:0.15; }
+.hero-content { position:relative; z-index:1; max-width:1400px; margin:0 auto; padding:0 3rem; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; width:100%; }
+.hero-hand { font-family:var(--font-hand); font-size:1.4rem; color:var(--sage); margin-bottom:0.5rem; display:block; animation:float 3s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+.hero-title { font-family:var(--font-display); font-size:5rem; font-weight:900; line-height:1.05; color:var(--espresso); margin-bottom:1.5rem; }
+.hero-title .highlight { color:var(--caramel); position:relative; display:inline-block; }
+.hero-title .highlight::after { content:''; position:absolute; bottom:5px; left:0; width:100%; height:12px; background:var(--sage); opacity:0.3; z-index:-1; transform:rotate(-1deg); }
+.hero-subtitle { font-size:1.15rem; color:var(--mocha); margin-bottom:2.5rem; max-width:480px; line-height:1.8; }
+.hero-buttons { display:flex; gap:1rem; align-items:center; flex-wrap:wrap; }
+.btn-primary { display:inline-flex; align-items:center; gap:0.5rem; background:var(--espresso); color:var(--cream); padding:1rem 2rem; border-radius:50px; text-decoration:none; font-weight:600; font-size:0.95rem; transition:all 0.3s ease; border:none; cursor:pointer; }
+.btn-primary:hover { background:var(--mocha); transform:translateY(-3px); box-shadow:0 8px 25px rgba(60,36,21,0.25); }
+.btn-secondary { display:inline-flex; align-items:center; gap:0.5rem; background:transparent; color:var(--mocha); padding:1rem 2rem; border-radius:50px; text-decoration:none; font-weight:500; font-size:0.95rem; border:2px solid var(--soft-gray); transition:all 0.3s ease; cursor:pointer; }
+.btn-secondary:hover { border-color:var(--caramel); color:var(--espresso); }
+.hero-visual { position:relative; display:flex; justify-content:center; align-items:center; }
+.hero-image-wrapper { position:relative; width:480px; height:560px; }
+.hero-image-frame { position:absolute; width:100%; height:100%; border-radius:200px 200px 40px 40px; overflow:hidden; background:var(--latte); box-shadow:0 30px 60px rgba(60,36,21,0.15); }
+.hero-image-frame img { width:100%; height:100%; object-fit:cover; }
+.hero-floating-card { position:absolute; background:var(--warm-white); border-radius:20px; padding:1.2rem 1.5rem; box-shadow:0 10px 40px rgba(60,36,21,0.1); z-index:2; animation:float 4s ease-in-out infinite; }
+.hero-floating-card.rating { top:10%; right:-60px; animation-delay:0.5s; }
+.hero-floating-card.hours { bottom:15%; left:-70px; animation-delay:1s; }
+.floating-stars { color:var(--caramel); font-size:1.1rem; margin-bottom:0.2rem; }
+.floating-label { font-size:0.8rem; color:var(--mocha); font-weight:500; }
+.floating-value { font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:var(--espresso); }
+.hero-deco { position:absolute; font-family:var(--font-hand); font-size:2rem; color:var(--sage); opacity:0.5; z-index:3; }
+.hero-deco.bean { top:5%; left:10%; transform:rotate(-15deg); }
+.hero-deco.leaf { bottom:5%; right:5%; transform:rotate(20deg); }
+
+/* SCROLL BANNER */
+.scroll-banner { background:var(--espresso); padding:1rem 0; overflow:hidden; white-space:nowrap; }
+.scroll-banner-inner { display:flex; animation:scroll-banner 20s linear infinite; }
+.scroll-banner-inner span { color:var(--cream); font-family:var(--font-display); font-size:1.1rem; font-weight:400; padding:0 2rem; letter-spacing:2px; }
+.scroll-banner-inner span .dot { color:var(--caramel); margin:0 0.5rem; }
+@keyframes scroll-banner { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* SECTION */
+.section { padding:7rem 3rem; max-width:1400px; margin:0 auto; }
+.section-label { font-family:var(--font-hand); font-size:1.3rem; color:var(--sage); margin-bottom:0.5rem; display:block; }
+.section-title { font-family:var(--font-display); font-size:3.2rem; font-weight:900; color:var(--espresso); margin-bottom:1.2rem; line-height:1.15; }
+.section-title .accent { color:var(--caramel); }
+.section-desc { font-size:1.1rem; color:var(--mocha); max-width:560px; line-height:1.8; margin-bottom:3rem; }
+
+/* FEATURES */
+.features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+.feature-card { background:var(--warm-white); border-radius:24px; padding:2.5rem; position:relative; overflow:hidden; transition:all 0.4s ease; border:1px solid transparent; }
+.feature-card:hover { transform:translateY(-8px); box-shadow:0 20px 50px rgba(60,36,21,0.1); border-color:var(--soft-gray); }
+.feature-icon { width:64px; height:64px; border-radius:20px; display:flex; align-items:center; justify-content:center; font-size:1.8rem; margin-bottom:1.5rem; }
+.feature-icon.coffee { background:rgba(196,136,58,0.15); }
+.feature-icon.pastries { background:rgba(139,158,107,0.15); }
+.feature-icon.vibes { background:rgba(196,122,122,0.15); }
+.feature-card h3 { font-family:var(--font-display); font-size:1.4rem; font-weight:700; color:var(--espresso); margin-bottom:0.8rem; }
+.feature-card p { font-size:0.95rem; color:var(--mocha); line-height:1.7; }
+.feature-number { position:absolute; top:1.5rem; right:1.5rem; font-family:var(--font-display); font-size:4rem; font-weight:900; color:var(--soft-gray); opacity:0.4; line-height:1; }
+
+/* SPLIT */
+.split-section { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; padding:5rem 0; }
+.split-image { position:relative; border-radius:30px; overflow:hidden; height:500px; box-shadow:0 20px 50px rgba(60,36,21,0.12); }
+.split-image img { width:100%; height:100%; object-fit:cover; }
+.split-image-badge { position:absolute; bottom:1.5rem; left:1.5rem; background:var(--cream); padding:1rem 1.5rem; border-radius:16px; box-shadow:0 8px 25px rgba(60,36,21,0.15); }
+.split-image-badge span { font-family:var(--font-display); font-weight:700; color:var(--espresso); }
+.split-text .section-title { margin-bottom:1rem; }
+.split-text p { font-size:1.05rem; color:var(--mocha); line-height:1.8; margin-bottom:1.5rem; }
+
+/* STATS */
+.stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:2rem; padding:4rem 0; border-top:1px solid var(--soft-gray); border-bottom:1px solid var(--soft-gray); }
+.stat-item { text-align:center; }
+.stat-number { font-family:var(--font-display); font-size:3rem; font-weight:900; color:var(--espresso); line-height:1; margin-bottom:0.3rem; }
+.stat-number .stat-accent { color:var(--caramel); }
+.stat-label { font-size:0.9rem; color:var(--mocha); font-weight:500; text-transform:uppercase; letter-spacing:1px; }
+
+/* GALLERY */
+.gallery-grid { display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(2,220px); gap:1rem; }
+.gallery-grid .gallery-item:first-child { grid-column:span 2; grid-row:span 2; }
+.gallery-item { border-radius:20px; overflow:hidden; position:relative; cursor:pointer; }
+.gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease; }
+.gallery-item:hover img { transform:scale(1.05); }
+.gallery-item::after { content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(60,36,21,0.4),transparent); opacity:0; transition:opacity 0.3s; }
+.gallery-item:hover::after { opacity:1; }
+
+/* TESTIMONIALS */
+.testimonials-section { background:var(--espresso); padding:6rem 3rem; position:relative; overflow:hidden; }
+.testimonials-section .section-label { color:var(--sage); }
+.testimonials-section .section-title { color:var(--cream); }
+.testimonials-section .section-desc { color:var(--latte); }
+.testimonials-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; max-width:1400px; margin:0 auto; }
+.testimonial-card { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:24px; padding:2.5rem; backdrop-filter:blur(10px); transition:all 0.3s; }
+.testimonial-card:hover { background:rgba(255,255,255,0.08); transform:translateY(-5px); }
+.testimonial-stars { color:var(--caramel); font-size:1rem; margin-bottom:1rem; letter-spacing:2px; }
+.testimonial-text { color:var(--cream); font-size:1rem; line-height:1.7; margin-bottom:1.5rem; font-style:italic; }
+.testimonial-author { display:flex; align-items:center; gap:1rem; }
+.testimonial-avatar { width:48px; height:48px; border-radius:50%; background:var(--latte); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:700; color:var(--espresso); font-size:1.1rem; }
+.testimonial-name { font-family:var(--font-display); font-weight:700; color:var(--cream); font-size:0.95rem; }
+.testimonial-role { font-size:0.8rem; color:var(--latte); }
+
+/* CTA */
+.cta-section { padding:6rem 3rem; text-align:center; position:relative; overflow:hidden; }
+.cta-bg-circle { position:absolute; border-radius:50%; filter:blur(100px); opacity:0.2; }
+.cta-bg-circle.a { width:500px; height:500px; background:var(--caramel); top:-200px; left:-100px; }
+.cta-bg-circle.b { width:400px; height:400px; background:var(--sage); bottom:-150px; right:-100px; }
+.cta-content { position:relative; z-index:1; max-width:650px; margin:0 auto; }
+.cta-content .section-title { font-size:3rem; }
+.cta-content p { font-size:1.1rem; color:var(--mocha); margin-bottom:2.5rem; line-height:1.8; }
+
+/* FOOTER */
+.footer { background:var(--espresso); padding:4rem 3rem 2rem; color:var(--cream); }
+.footer-inner { max-width:1400px; margin:0 auto; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem; padding-bottom:3rem; border-bottom:1px solid rgba(255,255,255,0.1); }
+.footer-brand h3 { font-family:var(--font-display); font-size:1.8rem; font-weight:900; margin-bottom:1rem; color:var(--cream); }
+.footer-brand h3 span { color:var(--caramel); }
+.footer-brand p { color:var(--latte); font-size:0.95rem; line-height:1.7; max-width:320px; margin-bottom:1.5rem; }
+.footer-social { display:flex; gap:0.8rem; }
+.footer-social a { width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:var(--cream); text-decoration:none; transition:all 0.3s; font-size:1rem; }
+.footer-social a:hover { background:var(--caramel); transform:translateY(-3px); }
+.footer-col h4 { font-family:var(--font-display); font-size:1.1rem; font-weight:700; margin-bottom:1.2rem; color:var(--cream); }
+.footer-col ul { list-style:none; }
+.footer-col ul li { margin-bottom:0.7rem; }
+.footer-col ul li a { color:var(--latte); text-decoration:none; font-size:0.9rem; transition:color 0.3s; }
+.footer-col ul li a:hover { color:var(--caramel); }
+.footer-bottom { max-width:1400px; margin:0 auto; padding-top:1.5rem; display:flex; justify-content:space-between; align-items:center; color:var(--latte); font-size:0.85rem; }
+
+/* PAGE HERO */
+.page-hero { min-height:50vh; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; padding-top:6rem; }
+.page-hero-content { position:relative; z-index:1; }
+.page-hero .section-title { font-size:4rem; margin-bottom:1rem; }
+.page-hero .section-desc { margin:0 auto; max-width:600px; }
+
+/* ABOUT */
+.story-section { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; padding:5rem 0; }
+.story-image { border-radius:30px; overflow:hidden; height:450px; position:relative; }
+.story-image img { width:100%; height:100%; object-fit:cover; }
+.story-text h3 { font-family:var(--font-display); font-size:2rem; font-weight:700; color:var(--espresso); margin-bottom:1rem; }
+.story-text p { font-size:1.05rem; color:var(--mocha); line-height:1.8; margin-bottom:1.5rem; }
+.values-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2rem; margin-top:2rem; }
+.value-card { background:var(--warm-white); border-radius:20px; padding:2rem; border-left:4px solid var(--caramel); transition:all 0.3s; }
+.value-card:hover { transform:translateY(-4px); box-shadow:0 12px 30px rgba(60,36,21,0.08); }
+.value-card h4 { font-family:var(--font-display); font-size:1.2rem; font-weight:700; color:var(--espresso); margin-bottom:0.5rem; }
+.value-card p { font-size:0.9rem; color:var(--mocha); line-height:1.6; }
+.team-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2rem; }
+.team-card { text-align:center; background:var(--warm-white); border-radius:24px; padding:2rem; transition:all 0.3s; }
+.team-card:hover { transform:translateY(-6px); box-shadow:0 15px 40px rgba(60,36,21,0.1); }
+.team-avatar { width:100px; height:100px; border-radius:50%; background:var(--latte); margin:0 auto 1.2rem; display:flex; align-items:center; justify-content:center; font-size:2.5rem; }
+.team-card h4 { font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:var(--espresso); margin-bottom:0.3rem; }
+.team-card .role { font-size:0.85rem; color:var(--caramel); font-weight:500; }
+
+/* MENU */
+.menu-categories { display:flex; gap:1rem; margin-bottom:2.5rem; flex-wrap:wrap; }
+.menu-cat-btn { background:var(--warm-white); border:2px solid var(--soft-gray); color:var(--mocha); padding:0.6rem 1.5rem; border-radius:50px; font-family:var(--font-body); font-size:0.9rem; font-weight:500; cursor:pointer; transition:all 0.3s; }
+.menu-cat-btn:hover, .menu-cat-btn.active { background:var(--espresso); border-color:var(--espresso); color:var(--cream); }
+.menu-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+.menu-item { display:flex; align-items:center; gap:1.5rem; background:var(--warm-white); border-radius:20px; padding:1.5rem; transition:all 0.3s; border:1px solid transparent; }
+.menu-item:hover { transform:translateY(-4px); box-shadow:0 12px 30px rgba(60,36,21,0.08); border-color:var(--soft-gray); }
+.menu-item-img { width:80px; height:80px; border-radius:16px; object-fit:cover; flex-shrink:0; }
+.menu-item-info { flex:1; }
+.menu-item-name { font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:var(--espresso); margin-bottom:0.3rem; }
+.menu-item-desc { font-size:0.85rem; color:var(--mocha); line-height:1.5; }
+.menu-item-price { font-family:var(--font-display); font-size:1.2rem; font-weight:700; color:var(--caramel); flex-shrink:0; }
+.menu-item-tag { display:inline-block; font-size:0.7rem; background:rgba(139,158,107,0.15); color:var(--deep-sage); padding:0.2rem 0.6rem; border-radius:50px; font-weight:600; margin-left:0.5rem; text-transform:uppercase; letter-spacing:0.5px; }
+
+/* CONTACT */
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; padding:3rem 0; }
+.contact-info-cards { display:flex; flex-direction:column; gap:1.5rem; }
+.contact-info-card { display:flex; align-items:flex-start; gap:1.2rem; background:var(--warm-white); border-radius:20px; padding:1.5rem; transition:all 0.3s; }
+.contact-info-card:hover { transform:translateX(8px); box-shadow:0 8px 25px rgba(60,36,21,0.08); }
+.contact-icon { width:50px; height:50px; border-radius:14px; background:rgba(196,136,58,0.15); display:flex; align-items:center; justify-content:center; font-size:1.3rem; flex-shrink:0; }
+.contact-info-card h4 { font-family:var(--font-display); font-weight:700; color:var(--espresso); font-size:1rem; margin-bottom:0.3rem; }
+.contact-info-card p { font-size:0.9rem; color:var(--mocha); line-height:1.5; }
+.contact-form { background:var(--warm-white); border-radius:30px; padding:3rem; box-shadow:0 10px 40px rgba(60,36,21,0.08); }
+.form-group { margin-bottom:1.5rem; }
+.form-group label { display:block; font-size:0.9rem; font-weight:600; color:var(--espresso); margin-bottom:0.5rem; }
+.form-group input, .form-group textarea, .form-group select { width:100%; padding:0.9rem 1.2rem; border:2px solid var(--soft-gray); border-radius:14px; font-family:var(--font-body); font-size:0.95rem; color:var(--charcoal); background:var(--cream); transition:all 0.3s; outline:none; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color:var(--caramel); box-shadow:0 0 0 4px rgba(196,136,58,0.1); }
+.form-group textarea { resize:vertical; min-height:120px; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.form-submit { width:100%; padding:1rem; background:var(--espresso); color:var(--cream); border:none; border-radius:14px; font-family:var(--font-body); font-size:1rem; font-weight:600; cursor:pointer; transition:all 0.3s; }
+.form-submit:hover { background:var(--mocha); transform:translateY(-2px); box-shadow:0 8px 25px rgba(60,36,21,0.25); }
+.faq-item { background:var(--warm-white); border-radius:16px; padding:1.5rem 2rem; margin-bottom:1rem; }
+.faq-item h4 { font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:var(--espresso); margin-bottom:0.5rem; }
+.faq-item p { font-size:0.95rem; color:var(--mocha); line-height:1.7; }
+
+/* ADMIN */
+.admin-login { min-height:100vh; display:flex; align-items:center; justify-content:center; background:#1a1a2e; }
+.admin-box { background:#16213e; border-radius:20px; padding:3rem; width:100%; max-width:400px; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.3); }
+.admin-box .logo { font-size:3rem; margin-bottom:1rem; }
+.admin-box h1 { font-size:1.5rem; color:#fff; margin-bottom:0.3rem; }
+.admin-box p { font-size:0.85rem; color:#888; margin-bottom:2rem; }
+.admin-box input { width:100%; padding:0.9rem 1.2rem; border:2px solid #2a2a4a; border-radius:12px; background:#0f3460; color:#fff; font-size:1rem; font-family:inherit; outline:none; transition:border 0.3s; margin-bottom:1rem; }
+.admin-box input:focus { border-color:#e94560; }
+.admin-box button { width:100%; padding:0.9rem; background:#e94560; color:#fff; border:none; border-radius:12px; font-size:1rem; font-weight:700; cursor:pointer; transition:all 0.3s; font-family:inherit; }
+.admin-box button:hover { background:#c73652; }
+.admin-err { color:#e94560; font-size:0.85rem; margin-top:0.8rem; display:none; }
+.admin-panel { background:#1a1a2e; min-height:100vh; color:#e0e0e0; }
+.admin-header { background:#16213e; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #2a2a4a; }
+.admin-header h2 { font-size:1.2rem; color:#fff; }
+.admin-header h2 span { color:#e94560; }
+.admin-header .logout { background:transparent; border:1px solid #e94560; color:#e94560; padding:0.5rem 1rem; border-radius:8px; cursor:pointer; font-family:inherit; font-size:0.85rem; }
+.admin-body { display:flex; min-height:calc(100vh - 60px); }
+.admin-sidebar { width:220px; background:#16213e; padding:1.5rem 0; border-right:1px solid #2a2a4a; flex-shrink:0; }
+.admin-sidebar a { display:block; padding:0.8rem 1.5rem; color:#888; text-decoration:none; font-size:0.9rem; cursor:pointer; transition:all 0.2s; border-left:3px solid transparent; }
+.admin-sidebar a:hover { color:#fff; background:#0f3460; }
+.admin-sidebar a.active { color:#e94560; background:#0f3460; border-left-color:#e94560; }
+.admin-content { flex:1; padding:2rem; overflow-y:auto; }
+.admin-sec { display:none; }
+.admin-sec.active { display:block; }
+.admin-sec h3 { font-size:1.5rem; color:#fff; margin-bottom:0.5rem; }
+.admin-sec .sub { color:#888; font-size:0.9rem; margin-bottom:2rem; }
+.fcard { background:#16213e; border-radius:16px; padding:2rem; margin-bottom:1.5rem; border:1px solid #2a2a4a; }
+.fcard h4 { color:#e94560; font-size:0.95rem; margin-bottom:1.2rem; text-transform:uppercase; letter-spacing:1px; }
+.af { margin-bottom:1rem; }
+.af label { display:block; font-size:0.8rem; color:#888; margin-bottom:0.4rem; text-transform:uppercase; letter-spacing:0.5px; }
+.af input, .af textarea, .af select { width:100%; padding:0.7rem 1rem; border:1px solid #2a2a4a; border-radius:10px; background:#0f3460; color:#fff; font-size:0.9rem; font-family:inherit; outline:none; }
+.af input:focus, .af textarea:focus { border-color:#e94560; }
+.af textarea { min-height:80px; resize:vertical; }
+.afrow { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.mtbl { width:100%; border-collapse:collapse; }
+.mtbl th { text-align:left; padding:0.6rem; color:#888; font-size:0.75rem; text-transform:uppercase; border-bottom:1px solid #2a2a4a; }
+.mtbl td { padding:0.6rem; border-bottom:1px solid #1a1a2e; }
+.mtbl td input { width:100%; padding:0.4rem 0.7rem; border:1px solid #2a2a4a; border-radius:8px; background:#0f3460; color:#fff; font-size:0.8rem; font-family:inherit; outline:none; }
+.mtbl td input:focus { border-color:#e94560; }
+.mtbl td select { padding:0.4rem; border:1px solid #2a2a4a; border-radius:8px; background:#0f3460; color:#fff; font-size:0.8rem; font-family:inherit; }
+.btn-del { background:#e94560; color:#fff; border:none; padding:0.3rem 0.7rem; border-radius:6px; cursor:pointer; font-size:0.75rem; }
+.btn-add { background:transparent; border:2px dashed #2a2a4a; color:#888; padding:0.7rem; border-radius:10px; width:100%; cursor:pointer; font-size:0.9rem; font-family:inherit; margin-top:1rem; transition:all 0.3s; }
+.btn-add:hover { border-color:#e94560; color:#e94560; }
+.btn-save { background:#e94560; color:#fff; border:none; padding:0.7rem 2rem; border-radius:10px; font-size:0.95rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all 0.3s; }
+.btn-save:hover { background:#c73652; }
+.btn-dl { background:#4ecca3; color:#1a1a2e; border:none; padding:0.7rem 2rem; border-radius:10px; font-size:0.95rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all 0.3s; }
+.btn-dl:hover { background:#3db892; }
+.save-bar { position:fixed; bottom:0; left:0; right:0; background:#16213e; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-top:1px solid #2a2a4a; z-index:100; }
+.save-bar .st { font-size:0.85rem; color:#888; }
+.save-bar .st.ok { color:#4ecca3; }
+.bgrp { display:flex; gap:0.8rem; }
+@media(max-width:768px) { .admin-sidebar{display:none} .admin-body{flex-direction:column} .afrow{grid-template-columns:1fr} .admin-content{padding:1rem} .mtbl{font-size:0.7rem} }
+
+/* ANIMATIONS */
+.fade-in { opacity:0; transform:translateY(30px); transition:all 0.8s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+.fade-in-left { opacity:0; transform:translateX(-40px); transition:all 0.8s ease; }
+.fade-in-left.visible { opacity:1; transform:translateX(0); }
+.fade-in-right { opacity:0; transform:translateX(40px); transition:all 0.8s ease; }
+.fade-in-right.visible { opacity:1; transform:translateX(0); }
+
+/* RESPONSIVE */
+@media (max-width:1024px) {
+  .hero-content { grid-template-columns:1fr; text-align:center; gap:2rem; }
+  .hero-title { font-size:3.5rem; }
+  .hero-subtitle { margin:0 auto 2rem; }
+  .hero-buttons { justify-content:center; }
+  .hero-visual { display:none; }
+  .features-grid, .testimonials-grid, .menu-grid { grid-template-columns:1fr; }
+  .split-section, .story-section, .contact-grid { grid-template-columns:1fr; }
+  .stats-row { grid-template-columns:repeat(2,1fr); }
+  .footer-inner { grid-template-columns:1fr 1fr; }
+  .team-grid { grid-template-columns:repeat(2,1fr); }
+  .gallery-grid { grid-template-columns:repeat(2,1fr); grid-template-rows:auto; }
+  .gallery-grid .gallery-item:first-child { grid-row:span 1; }
+}
+@media (max-width:768px) {
+  .navbar { padding:1rem 1.5rem; }
+  .nav-links { display:none; position:fixed; top:0; left:0; width:100%; height:100vh; background:var(--cream); flex-direction:column; justify-content:center; align-items:center; gap:2rem; z-index:999; }
+  .nav-links.open { display:flex; }
+  .hamburger { display:flex; }
+  .hero-title { font-size:2.8rem; }
+  .section { padding:4rem 1.5rem; }
+  .section-title { font-size:2.2rem; }
+  .page-hero .section-title { font-size:2.8rem; }
+  .stats-row { grid-template-columns:1fr 1fr; gap:1.5rem; }
+  .stat-number { font-size:2.2rem; }
+  .footer-inner { grid-template-columns:1fr; }
+  .footer-bottom { flex-direction:column; gap:0.5rem; text-align:center; }
+  .form-row { grid-template-columns:1fr; }
+  .values-grid { grid-template-columns:1fr; }
+  .team-grid { grid-template-columns:1fr 1fr; }
+}
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <a class="nav-logo" onclick="showPage('home')">Froth <span>&</span> Frolic</a>
+    <ul class="nav-links">
+      <li><a onclick="showPage('home')" class="active" data-page="home">Home</a></li>
+      <li><a onclick="showPage('about')" data-page="about">About</a></li>
+      <li><a onclick="showPage('menu')" data-page="menu">Menu</a></li>
+      <li><a onclick="showPage('contact')" data-page="contact">Contact</a></li>
+      <li><a onclick="showPage('contact')" class="nav-cta">Visit Us</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- ==================== HOME PAGE ==================== -->
+  <div id="page-home" class="page-section active">
+
+    <section class="hero">
+      <div class="hero-bg-shape one"></div>
+      <div class="hero-bg-shape two"></div>
+      <div class="hero-bg-shape three"></div>
+      <div class="hero-content">
+        <div class="hero-text">
+          <span class="hero-hand">Where Comfort Meets Cappuccino ☕</span>
+          <h1 class="hero-title">Where Every<br>Cup Tells a<br><span class="highlight">Story</span></h1>
+          <p class="hero-subtitle">Nestled in the heart of the city, Froth & Frolic is your artisan escape — handcrafted brews, freshly baked pastries, and a space that feels like a warm hug.</p>
+          <div class="hero-buttons">
+            <a onclick="showPage('menu')" class="btn-primary">Explore Our Menu →</a>
+            <a onclick="showPage('about')" class="btn-secondary">Our Story</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-image-wrapper">
+            <div class="hero-image-frame">
+              <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600&h=700&fit=crop" alt="Café interior">
+            </div>
+            <div class="hero-floating-card rating">
+              <div class="floating-stars">★★★★★</div>
+              <div class="floating-label">Google Rating</div>
+              <div class="floating-value">4.9 / 5.0</div>
+            </div>
+            <div class="hero-floating-card hours">
+              <div class="floating-label">Open Today</div>
+              <div class="floating-value">10 AM – 9 PM</div>
+              <div style="font-size:0.7rem;color:var(--rose);margin-top:0.3rem;font-weight:600;">Friday Closed</div>
+            </div>
+            <div class="hero-deco bean">☕</div>
+            <div class="hero-deco leaf">🌿</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="scroll-banner">
+      <div class="scroll-banner-inner">
+        <span>Espresso <span class="dot">•</span> Cappuccino <span class="dot">•</span> Latte Art <span class="dot">•</span> Croissants <span class="dot">•</span> Cold Brew <span class="dot">•</span> Matcha <span class="dot">•</span> Pastries <span class="dot">•</span> Chai <span class="dot">•</span> Mocha <span class="dot">•</span> Affogato <span class="dot">•</span> Sourdough <span class="dot">•</span> Flat White</span>
+        <span>Espresso <span class="dot">•</span> Cappuccino <span class="dot">•</span> Latte Art <span class="dot">•</span> Croissants <span class="dot">•</span> Cold Brew <span class="dot">•</span> Matcha <span class="dot">•</span> Pastries <span class="dot">•</span> Chai <span class="dot">•</span> Mocha <span class="dot">•</span> Affogato <span class="dot">•</span> Sourdough <span class="dot">•</span> Flat White</span>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="fade-in">
+        <span class="section-label">Why choose us?</span>
+        <h2 class="section-title">Crafted with <span class="accent">Love</span> & Intention</h2>
+        <p class="section-desc">Every detail at Froth & Frolic is thoughtfully considered — from the beans we source to the vibes we curate.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <span class="feature-number">01</span>
+          <div class="feature-icon coffee">☕</div>
+          <h3>Single-Origin Brews</h3>
+          <p>We source beans directly from farms in Ethiopia, Colombia, and Guatemala. Each cup is a journey from soil to soul.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <span class="feature-number">02</span>
+          <div class="feature-icon pastries">🥐</div>
+          <h3>Baked In-House Daily</h3>
+          <p>Our kitchen comes alive at 5 AM. Croissants, sourdough, cinnamon rolls — everything fresh, everything from scratch.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <span class="feature-number">03</span>
+          <div class="feature-icon vibes">🎶</div>
+          <h3>The Vibe Check</h3>
+          <p>Curated playlists, warm lighting, cozy nooks — we designed a space where you can think, create, or just be.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="split-section">
+        <div class="split-image fade-in-left">
+          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=700&h=500&fit=crop" alt="Barista at work">
+          <div class="split-image-badge"><span>Since 2019 ✨</span></div>
+        </div>
+        <div class="split-text fade-in-right">
+          <span class="section-label">Our Philosophy</span>
+          <h2 class="section-title">More Than Just <span class="accent">Coffee</span></h2>
+          <p>We believe a café should be a third place — not work, not home, but somewhere in between where magic happens. A place for conversations that matter, ideas that spark, and moments that linger.</p>
+          <p>Every ingredient is intentional. Every recipe is tested until it's unforgettable. Every corner of our space is designed to make you feel something.</p>
+          <a onclick="showPage('about')" class="btn-primary">Read Our Story →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="stats-row">
+        <div class="stat-item fade-in"><div class="stat-number" data-count="7" data-suffix="+">0</div><div class="stat-label">Years Brewing</div></div>
+        <div class="stat-item fade-in"><div class="stat-number" data-count="50" data-suffix="K+">0</div><div class="stat-label">Cups Served</div></div>
+        <div class="stat-item fade-in"><div class="stat-number" data-count="12" data-suffix="">0</div><div class="stat-label">Bean Origins</div></div>
+        <div class="stat-item fade-in"><div class="stat-number" data-count="4" data-suffix=".9 ★">0</div><div class="stat-label">Average Rating</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="fade-in">
+        <span class="section-label">A glimpse inside</span>
+        <h2 class="section-title">Life at <span class="accent">Froth & Frolic</span></h2>
+      </div>
+      <div class="gallery-grid fade-in">
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800&h=600&fit=crop" alt="Latte art"></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=300&fit=crop" alt="Café interior"></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop" alt="Coffee beans"></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1559305616-3f99cd43e353?w=400&h=300&fit=crop" alt="Pastries"></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&h=300&fit=crop" alt="Morning brew"></div>
+      </div>
+    </section>
+
+    <section class="testimonials-section">
+      <div class="fade-in">
+        <span class="section-label">What people say</span>
+        <h2 class="section-title">Loved by <span class="accent">Thousands</span></h2>
+        <p class="section-desc">Don't take our word for it — hear from the people who make Froth & Frolic their daily ritual.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"The best flat white I've ever had — and I've travelled extensively for coffee. The atmosphere is just *chef's kiss*."</p>
+          <div class="testimonial-author"><div class="testimonial-avatar">A</div><div><div class="testimonial-name">Ananya Sharma</div><div class="testimonial-role">Regular since 2020</div></div></div>
+        </div>
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"I wrote my entire thesis here. The staff remembers my order, the playlist is always perfect, and the croissants are dangerously good."</p>
+          <div class="testimonial-author"><div class="testimonial-avatar">R</div><div><div class="testimonial-name">Rahul Dutta</div><div class="testimonial-role">Student & Coffee Enthusiast</div></div></div>
+        </div>
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Finally, a café that takes matcha as seriously as espresso. The ceremonial grade matcha latte here is unmatched."</p>
+          <div class="testimonial-author"><div class="testimonial-avatar">P</div><div><div class="testimonial-name">Priya Baruah</div><div class="testimonial-role">Tea Lover</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="cta-bg-circle a"></div>
+      <div class="cta-bg-circle b"></div>
+      <div class="cta-content fade-in">
+        <span class="section-label">Ready to visit?</span>
+        <h2 class="section-title">Your Table is <span class="accent">Waiting</span></h2>
+        <p>Walk in, sit down, and let the aroma guide you. No reservations needed — just bring your appetite for something wonderful.</p>
+        <div class="hero-buttons" style="justify-content:center;">
+          <a onclick="showPage('menu')" class="btn-primary">See the Menu →</a>
+          <a onclick="showPage('contact')" class="btn-secondary">Get Directions</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== ABOUT PAGE ==================== -->
+  <div id="page-about" class="page-section">
+    <section class="page-hero">
+      <div class="hero-bg-shape one"></div>
+      <div class="hero-bg-shape two"></div>
+      <div class="page-hero-content">
+        <span class="section-label">Our Story</span>
+        <h1 class="section-title">The Soul Behind <span class="accent">the Brew</span></h1>
+        <p class="section-desc">What started as a dream in a tiny kitchen has grown into a community — one cup at a time.</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="story-section">
+        <div class="story-image fade-in-left"><img src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=700&h=500&fit=crop" alt="Café interior"></div>
+        <div class="story-text fade-in-right">
+          <span class="section-label">How it began</span>
+          <h3>Where Comfort Meets Cappuccino</h3>
+          <p>What started as a shared love for great coffee and warm spaces became something Guwahati didn't have yet: a café that felt like a second home. Not pretentious. Not rushed. Just genuine.</p>
+          <p>The first week, we served 23 people. By the end of the first month, we had regulars who'd come every single day.</p>
+          <p>Today, Froth & Frolic is more than a café — it's a community hub, a creative workspace, a meeting ground, and a place where the barista knows your name and your order.</p>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="fade-in">
+        <span class="section-label">What we stand for</span>
+        <h2 class="section-title">Our <span class="accent">Values</span></h2>
+        <p class="section-desc">These aren't just words on a wall. They're the compass that guides every decision we make.</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card fade-in"><h4>🌱 Sustainability First</h4><p>From compostable cups to zero-waste kitchen practices, we're committed to treading lightly on this planet.</p></div>
+        <div class="value-card fade-in"><h4>🤝 Community Over Competition</h4><p>We collaborate with local artists, musicians, and bakers. When the community thrives, we all thrive.</p></div>
+        <div class="value-card fade-in"><h4>✨ Uncompromising Quality</h4><p>We taste-test every new recipe at least 50 times before it hits the menu. Mediocrity is not on the menu.</p></div>
+        <div class="value-card fade-in"><h4>☕ Accessible Excellence</h4><p>Great coffee shouldn't be exclusive. We keep our prices fair and our doors open to everyone.</p></div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="fade-in" style="text-align:center;">
+        <span class="section-label">The humans behind the magic</span>
+        <h2 class="section-title">Meet the <span class="accent">Team</span></h2>
+        <p class="section-desc" style="margin:0 auto 3rem;">A small, passionate crew that believes coffee is an act of love.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card fade-in"><div class="team-avatar">👩‍🍳</div><h4>Meera Borah</h4><p class="role">Co-Founder & Head Roaster</p></div>
+        <div class="team-card fade-in"><div class="team-avatar">👨‍🍳</div><h4>Arjun Kalita</h4><p class="role">Co-Founder & Head Chef</p></div>
+        <div class="team-card fade-in"><div class="team-avatar">🧑‍🎨</div><h4>Disha Phukan</h4><p class="role">Lead Barista & Latte Artist</p></div>
+        <div class="team-card fade-in"><div class="team-avatar">🧑‍💼</div><h4>Karan Saikia</h4><p class="role">Vibe Curator & Operations</p></div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="split-section">
+        <div class="split-text fade-in-left">
+          <span class="section-label">Our space</span>
+          <h2 class="section-title">Designed for <span class="accent">Comfort</span></h2>
+          <p>We spent months designing every corner — from the warm lighting that makes you look great in photos, to the acoustics that keep conversations intimate without feeling isolated.</p>
+          <p>Whether you're working on a deadline, catching up with an old friend, or just people-watching with a cappuccino, there's a spot here with your name on it.</p>
+          <ul style="list-style:none; margin-top:1.5rem;">
+            <li style="padding:0.5rem 0; color:var(--mocha);">✓ Free high-speed WiFi</li>
+            <li style="padding:0.5rem 0; color:var(--mocha);">✓ Power outlets at every seat</li>
+            <li style="padding:0.5rem 0; color:var(--mocha);">✓ Quiet reading nook</li>
+            <li style="padding:0.5rem 0; color:var(--mocha);">✓ Pet-friendly outdoor patio</li>
+            <li style="padding:0.5rem 0; color:var(--mocha);">✓ Community event space</li>
+          </ul>
+        </div>
+        <div class="split-image fade-in-right"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=700&h=500&fit=crop" alt="Café interior"></div>
+      </div>
+    </section>
+    <section class="cta-section">
+      <div class="cta-bg-circle a"></div>
+      <div class="cta-bg-circle b"></div>
+      <div class="cta-content fade-in">
+        <span class="section-label">Come say hi</span>
+        <h2 class="section-title">Experience It <span class="accent">Yourself</span></h2>
+        <p>Words can only do so much. The real magic happens when you walk through our doors and take that first sip.</p>
+        <div class="hero-buttons" style="justify-content:center;">
+          <a onclick="showPage('menu')" class="btn-primary">Explore the Menu →</a>
+          <a onclick="showPage('contact')" class="btn-secondary">Get Directions</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== MENU PAGE ==================== -->
+  <div id="page-menu" class="page-section">
+    <section class="page-hero">
+      <div class="hero-bg-shape one"></div>
+      <div class="hero-bg-shape two"></div>
+      <div class="page-hero-content">
+        <span class="section-label">What's brewing</span>
+        <h1 class="section-title">Our <span class="accent">Menu</span></h1>
+        <p class="section-desc">Every item is made with intention. Taste the difference that passion makes.</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="menu-categories fade-in">
+        <button class="menu-cat-btn active" data-category="all">All</button>
+        <button class="menu-cat-btn" data-category="coffee">Coffee</button>
+        <button class="menu-cat-btn" data-category="tea">Tea & Matcha</button>
+        <button class="menu-cat-btn" data-category="pastry">Pastries</button>
+        <button class="menu-cat-btn" data-category="special">Specials</button>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item fade-in" data-category="coffee">
+          <img class="menu-item-img" src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=120&h=120&fit=crop" alt="Espresso">
+          <div class="menu-item-info"><div class="menu-item-name">Classic Espresso <span class="menu-item-tag">Bestseller</span></div><div class="menu-item-desc">Double shot, perfectly extracted. Bold, rich, unapologetic.</div></div>
+          <div class="menu-item-price">₹149</div>
+        </div>
+        <div class="menu-item fade-in" data-category="coffee">
+          <img class="menu-item-img" src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=120&h=120&fit=crop" alt="Cappuccino">
+          <div class="menu-item-info"><div class="menu-item-name">Velvet Cappuccino</div><div class="menu-item-desc">Silky foam, rich espresso, a dusting of cocoa. Italian perfection.</div></div>
+          <div class="menu-item-price">₹199</div>
+        </div>
+        <div class="menu-item fade-in" data-category="coffee">
+          <img class="menu-item-img" src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=120&h=120&fit=crop" alt="Flat White">
+          <div class="menu-item-info"><div class="menu-item-name">Flat White <span class="menu-item-tag">Staff Pick</span></div><div class="menu-item-desc">Microfoam meets espresso in velvety harmony. Our most ordered drink.</div></div>
+          <div class="menu-item-price">₹219</div>
+        </div>
+        <div class="menu-item fade-in" data-category="coffee">
+          <img class="menu-item-img" src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=120&h=120&fit=crop" alt="Mocha">
+          <div class="menu-item-info"><div class="menu-item-name">Indulgent Mocha</div><div class="menu-item-desc">Belgian chocolate, espresso, steamed milk. A dessert in a cup.</div></div>
+          <div class="menu-item-price">₹249</div>
+        </div>
+        <div class="menu-item fade-in" data-category="coffee">
+          <img class="menu-item-img" src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=120&h=120&fit=crop" alt="Cold Brew">
+          <div class="menu-item-info"><div class="menu-item-name">Cold Brew</div><div class="menu-item-desc">Steeped for 18 hours. Smooth, bold, refreshing. Summer's best friend.</div></div>
+          <div class="menu-item-price">₹229</div>
+        </div>
+        <div class="menu-item fade-in" data-category="coffee">
+          <img class="menu-item-img" src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=120&h=120&fit=crop" alt="Affogato">
+          <div class="menu-item-info"><div class="menu-item-name">Affogato</div><div class="menu-item-desc">Vanilla gelato drowned in a shot of hot espresso. Pure bliss.</div></div>
+          <div class="menu-item-price">₹279</div>
+        </div>
+        <div class="menu-item fade-in" data-category="tea">
+          <img class="menu-item-img" src="https://images.unsplash.com/photo-1556881286-fc6915169721?w=120&h=120&fit=crop" alt="Matcha Latte">
+          <div class="menu-item-info"><div class="menu-item-name">Ceremonial Matcha Latte <span class="menu-item-tag">Popular</span></div><div class="menu-item-desc">Ceremonial grade matcha whisked with oat milk. Earthy, smooth, zen.</div></div>
+          <div class="menu-item-price">₹259</div>
+        </div>
+        <div class="menu-item fade-in" data-category="tea">
+          <img class="menu-item-img" src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=120&h=120&fit=crop" alt="Chai">
+          <div class="menu-item-info"><div class="menu-item-name">Masala Chai</div><div class="menu-item-desc">House-blend spices, slow-simmered with fresh ginger. Like home, but better.</div></div>
+          <div class="menu-item-price">₹129</div>
+        </div>
+        <div class="menu-item fade-in" data-category="tea">
+          <img class="menu-item-img" src="https://images.unsplash.com/photo-1556881286-fc6915169721?w=120&h=120&fit=crop" alt="Iced Matcha">
+          <div class="menu-item-info"><div class="menu-item-name">Iced Matcha Lemonade</div><div class="menu-item-desc">Matcha meets citrus in the most refreshing way possible.</div></div>
+          <div class="menu-item-price">₹239</div>
+        </div>
+        <div class="menu-item fade-in" data-category="tea">
+          <img class="menu-item-img" src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=120&h=120&fit=crop" alt="Chamomile">
+          <div class="menu-item-info"><div class="menu-item-name">Chamomile Bloom</div><div class="menu-item-desc">Organic chamomile with a touch of lavender and honey. Pure calm.</div></div>
+          <div class="menu-item-price">₹159</div>
+        </div>
+        <div class="menu-item fade-in" data-category="pastry">
+          <img class="menu-item-img" src="https://images.unsplash.com/photo-1555507036-ab1f4038024a?w=120&h=120&fit=crop" alt="Croissant">
+          <div class="menu-item-info"><div class="menu-item-name">Butter Croissant <span class="menu-item-tag">Bestseller</span></div><div class="menu-item-desc">72-hour laminated dough. 48 layers of buttery, flaky perfection.</div></div>
+          <div class="menu-item-price">₹149</div>
+        </div>
+        <div class="menu-item fade-in" data-category="pastry">
+          <img class="menu-item-img" src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=120&h=120&fit=crop" alt="Cinnamon Roll">
+          <div class="menu-item-info"><div class="menu-item-name">Cinnamon Roll</div><div class="menu-item-desc">Warm, gooey, swirled with cinnamon and topped with cream cheese glaze.</div></div>
+          <div class="menu-item-price">₹179</div>
+        </div>
+        <div class="menu-item fade-in" data-category="pastry">
+          <img class="menu-item-img" src="https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=120&h=120&fit=crop" alt="Sourdough">
+          <div class="menu-item-info"><div class="menu-item-name">Sourdough Toast</div><div class="menu-item-desc">House-baked sourdough with cultured butter & jam. Simple, perfect.</div></div>
+          <div class="menu-item-price">₹129</div>
+        </div>
+        <div class="menu-item fade-in" data-category="pastry">
+          <img class="menu-item-img" src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=120&h=120&fit=crop" alt="Banana Bread">
+          <div class="menu-item-info"><div class="menu-item-name">Banana Bread</div><div class="menu-item-desc">Moist, walnut-studded, with a caramelized top. Made with overripe love.</div></div>
+          <div class="menu-item-price">₹159</div>
+        </div>
+        <div class="menu-item fade-in" data-category="special">
+          <img class="menu-item-img" src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=120&h=120&fit=crop" alt="Seasonal Latte">
+          <div class="menu-item-info"><div class="menu-item-name">Seasonal Special <span class="menu-item-tag">Limited</span></div><div class="menu-item-desc">Our rotating seasonal latte. Ask your barista what's brewing this month!</div></div>
+          <div class="menu-item-price">₹289</div>
+        </div>
+        <div class="menu-item fade-in" data-category="special">
+          <img class="menu-item-img" src="https://images.unsplash.com/photo-1555507036-ab1f4038024a?w=120&h=120&fit=crop" alt="Tasting Flight">
+          <div class="menu-item-info"><div class="menu-item-name">Coffee Tasting Flight</div><div class="menu-item-desc">3 single-origin pour-overs paired with tasting notes. An experience.</div></div>
+          <div class="menu-item-price">₹449</div>
+        </div>
+        <div class="menu-item fade-in" data-category="special">
+          <img class="menu-item-img" src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=120&h=120&fit=crop" alt="Brunch Box">
+          <div class="menu-item-info"><div class="menu-item-name">Weekend Brunch Box</div><div class="menu-item-desc">Croissant, fruit bowl, yogurt, and any drink. Available Sat–Sun only.</div></div>
+          <div class="menu-item-price">₹499</div>
+        </div>
+        <div class="menu-item fade-in" data-category="special">
+          <img class="menu-item-img" src="https://images.unsplash.com/photo-1556881286-fc6915169721?w=120&h=120&fit=crop" alt="Wellness Shot">
+          <div class="menu-item-info"><div class="menu-item-name">Wellness Shot</div><div class="menu-item-desc">Turmeric, ginger, lemon, honey, and a pinch of black pepper. Immunity in a cup.</div></div>
+          <div class="menu-item-price">₹99</div>
+        </div>
+      </div>
+    </section>
+    <section class="cta-section">
+      <div class="cta-bg-circle a"></div>
+      <div class="cta-bg-circle b"></div>
+      <div class="cta-content fade-in">
+        <span class="section-label">Can't decide?</span>
+        <h2 class="section-title">Ask Our <span class="accent">Baristas</span></h2>
+        <p>Our team loves nothing more than helping you find your perfect drink. Tell us your mood, and we'll craft something just for you.</p>
+        <div class="hero-buttons" style="justify-content:center;"><a onclick="showPage('contact')" class="btn-primary">Visit Us Today →</a></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== CONTACT PAGE ==================== -->
+  <div id="page-contact" class="page-section">
+    <section class="page-hero">
+      <div class="hero-bg-shape one"></div>
+      <div class="hero-bg-shape two"></div>
+      <div class="page-hero-content">
+        <span class="section-label">Get in touch</span>
+        <h1 class="section-title">We'd Love to <span class="accent">Hear From You</span></h1>
+        <p class="section-desc">Got a question, a suggestion, or just want to say hi? We're all ears — and probably brewing something.</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="contact-grid">
+        <div class="fade-in-left">
+          <div class="contact-info-cards">
+            <div class="contact-info-card"><div class="contact-icon">📍</div><div><h4>Visit Us</h4><p>42 GS Road, Paltan Bazaar<br>Guwahati, Assam 781008</p></div></div>
+            <div class="contact-info-card"><div class="contact-icon">⏰</div><div><h4>Opening Hours</h4><p>Monday – Thursday: 10 AM – 9 PM<br>Saturday – Sunday: 10 AM – 9 PM<br>Friday: Closed</p></div></div>
+            <div class="contact-info-card"><div class="contact-icon">📞</div><div><h4>Call Us</h4><p>+91 123 456 7890</p></div></div>
+            <div class="contact-info-card"><div class="contact-icon">✉️</div><div><h4>Email Us</h4><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="274f424b4b4867415548534f4649434155484b4e440944484a">[email&#160;protected]</a></p></div></div>
+            <div class="contact-info-card"><div class="contact-icon">📱</div><div><h4>Follow Us</h4><p>@frothandfrolic on Instagram<br>Froth & Frolic on Facebook</p></div></div>
+          </div>
+        </div>
+        <div class="fade-in-right">
+          <div class="contact-form">
+            <h3 style="font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--espresso);margin-bottom:0.5rem;">Drop Us a Message</h3>
+            <p style="font-size:0.9rem;color:var(--mocha);margin-bottom:2rem;">We usually respond within 24 hours. Sometimes sooner — we're fast like our espresso.</p>
+            <form onsubmit="handleFormSubmit(event)">
+              <div class="form-row">
+                <div class="form-group"><label>Your Name</label><input type="text" placeholder="e.g. Meera Borah" required></div>
+                <div class="form-group"><label>Your Email</label><input type="email" placeholder="e.g. meera@example.com" required></div>
+              </div>
+              <div class="form-group"><label>Subject</label><select><option>General Inquiry</option><option>Feedback</option><option>Private Events & Bookings</option><option>Careers</option><option>Collaborations</option></select></div>
+              <div class="form-group"><label>Your Message</label><textarea placeholder="Tell us what's on your mind..." required></textarea></div>
+              <button type="submit" class="form-submit" id="formBtn">Send Message →</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section" style="padding-top:0;">
+      <div style="max-width:800px;margin:0 auto;">
+        <div class="fade-in" style="text-align:center;margin-bottom:2rem;">
+          <span class="section-label">Common questions</span>
+          <h2 class="section-title">Before You <span class="accent">Ask</span></h2>
+        </div>
+        <div class="faq-item fade-in" style="border-left:4px solid var(--caramel);"><h4>Do you take reservations?</h4><p>We're a walk-in café — no reservations needed! For private events or large groups (10+), please email us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d3b6a5b6bda7a093b5a1bca7bbb2bdb7b5a1bcbfbab0fdb0bcbe">[email&#160;protected]</a>.</p></div>
+        <div class="faq-item fade-in" style="border-left:4px solid var(--sage);"><h4>Do you have vegan and gluten-free options?</h4><p>Absolutely! We have oat milk, almond milk, and coconut milk for all drinks. Our gluten-free banana bread and vegan brownies are legendary.</p></div>
+        <div class="faq-item fade-in" style="border-left:4px solid var(--rose);"><h4>Are you open on Fridays?</h4><p>We're closed on Fridays to rest, recharge, and prepare for the weekend. But we're open Mon–Thu and Sat–Sun, 10 AM – 9 PM!</p></div>
+        <div class="faq-item fade-in" style="border-left:4px solid var(--latte);"><h4>Is WiFi available?</h4><p>Free high-speed WiFi with every order. Just ask for the password at the counter. Power outlets at every seat — we've got you covered.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- FOOTER (shared) -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h3>Froth <span>&</span> Frolic</h3>
+        <p>An artisan café where every cup is crafted with love and every moment is designed to delight. Come for the coffee, stay for the vibe.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com/frothandfrolic" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="Facebook">👤</a>
+          <a href="#" aria-label="Twitter">🐦</a>
+          <a href="#" aria-label="YouTube">▶️</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a onclick="showPage('home')" style="cursor:pointer">Home</a></li>
+          <li><a onclick="showPage('about')" style="cursor:pointer">About Us</a></li>
+          <li><a onclick="showPage('menu')" style="cursor:pointer">Menu</a></li>
+          <li><a onclick="showPage('contact')" style="cursor:pointer">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hours</h4>
+        <ul>
+          <li><a href="#">Mon–Thu: 10 AM – 9 PM</a></li>
+          <li><a href="#">Sat–Sun: 10 AM – 9 PM</a></li>
+          <li><a href="#" style="color:var(--rose)">Friday: Closed</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="/cdn-cgi/l/email-protection#264e434a4a4966405449524e4748424054494a4f450845494b"><span class="__cf_email__" data-cfemail="e189848d8d8ea187938e9589808f8587938e8d8882cf828e8c">[email&#160;protected]</span></a></li>
+          <li><a href="tel:+911234567890">+91 123 456 7890</a></li>
+          <li><a href="https://instagram.com/frothandfrolic" target="_blank">@frothandfrolic</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Froth & Frolic. All rights reserved.</span>
+      <span>Crafted with ☕ & ❤️ | <a onclick="showPage('admin')" style="color:var(--latte);cursor:pointer;opacity:0.5;font-size:0.75rem;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.5">Admin</a></span>
+    </div>
+  </footer>
+
+  <!-- ==================== ADMIN PAGE ==================== -->
+  <div id="page-admin" class="page-section">
+    <!-- Login -->
+    <div class="admin-login" id="adminLogin">
+      <div class="admin-box">
+        <div class="logo">☕</div>
+        <h1>Froth & Frolic</h1>
+        <p>Admin Panel — Authorized Access Only</p>
+        <input type="password" id="aPass" placeholder="Enter password" onkeydown="if(event.key==='Enter')adminLogin()">
+        <button onclick="adminLogin()">Login →</button>
+        <div class="admin-err" id="aErr">❌ Wrong password. Try again.</div>
+      </div>
+    </div>
+    <!-- Panel -->
+    <div class="admin-panel" id="adminPanel" style="display:none">
+      <div class="admin-header">
+        <h2>☕ Froth & <span>Frolic</span> Admin</h2>
+        <button class="logout" onclick="adminLogout()">Logout</button>
+      </div>
+      <div class="admin-body">
+        <div class="admin-sidebar">
+          <a class="active" onclick="aNav('home')">🏠 Home</a>
+          <a onclick="aNav('hours')">⏰ Hours</a>
+          <a onclick="aNav('menu')">📋 Menu</a>
+          <a onclick="aNav('contact')">📞 Contact</a>
+          <a onclick="aNav('about')">📖 About</a>
+          <a onclick="aNav('password')">🔑 Password</a>
+          <a onclick="aNav('publish')">🚀 Publish</a>
+        </div>
+        <div class="admin-content" style="padding-bottom:80px;">
+
+          <!-- HOME -->
+          <div class="admin-sec active" id="a-home">
+            <h3>Home Page</h3><p class="sub">Edit your homepage content</p>
+            <div class="fcard"><h4>Hero Section</h4>
+              <div class="af"><label>Tagline</label><input id="f_tagline" value="Where Comfort Meets Cappuccino"></div>
+              <div class="af"><label>Title Line 1</label><input id="f_title1" value="Where Every"></div>
+              <div class="af"><label>Title Line 2</label><input id="f_title2" value="Cup Tells a"></div>
+              <div class="af"><label>Title Line 3 (Highlighted)</label><input id="f_title3" value="Story"></div>
+              <div class="af"><label>Description</label><textarea id="f_heroDesc">Nestled in the heart of the city, Froth & Frolic is your artisan escape — handcrafted brews, freshly baked pastries, and a space that feels like a warm hug.</textarea></div>
+            </div>
+            <div class="fcard"><h4>Features</h4>
+              <div class="afrow"><div class="af"><label>Feature 1 Icon</label><input id="f_f1i" value="☕"></div><div class="af"><label>Feature 1 Title</label><input id="f_f1t" value="Single-Origin Brews"></div></div>
+              <div class="af"><label>Feature 1 Desc</label><textarea id="f_f1d">We source beans directly from farms in Ethiopia, Colombia, and Guatemala. Each cup is a journey from soil to soul.</textarea></div>
+              <div class="afrow"><div class="af"><label>Feature 2 Icon</label><input id="f_f2i" value="🥐"></div><div class="af"><label>Feature 2 Title</label><input id="f_f2t" value="Baked In-House Daily"></div></div>
+              <div class="af"><label>Feature 2 Desc</label><textarea id="f_f2d">Our kitchen comes alive at 5 AM. Croissants, sourdough, cinnamon rolls — everything fresh, everything from scratch.</textarea></div>
+              <div class="afrow"><div class="af"><label>Feature 3 Icon</label><input id="f_f3i" value="🎶"></div><div class="af"><label>Feature 3 Title</label><input id="f_f3t" value="The Vibe Check"></div></div>
+              <div class="af"><label>Feature 3 Desc</label><textarea id="f_f3d">Curated playlists, warm lighting, cozy nooks — we designed a space where you can think, create, or just be.</textarea></div>
+            </div>
+            <div class="fcard"><h4>Stats</h4>
+              <div class="afrow"><div class="af"><label>Stat 1</label><input id="f_s1n" value="7+"></div><div class="af"><label>Label</label><input id="f_s1l" value="Years Brewing"></div></div>
+              <div class="afrow"><div class="af"><label>Stat 2</label><input id="f_s2n" value="50K+"></div><div class="af"><label>Label</label><input id="f_s2l" value="Cups Served"></div></div>
+              <div class="afrow"><div class="af"><label>Stat 3</label><input id="f_s3n" value="12"></div><div class="af"><label>Label</label><input id="f_s3l" value="Bean Origins"></div></div>
+              <div class="afrow"><div class="af"><label>Stat 4</label><input id="f_s4n" value="4.9 ★"></div><div class="af"><label>Label</label><input id="f_s4l" value="Average Rating"></div></div>
+            </div>
+          </div>
+
+          <!-- HOURS -->
+          <div class="admin-sec" id="a-hours">
+            <h3>Opening Hours</h3><p class="sub">Set your café hours</p>
+            <div class="fcard"><h4>Weekly Schedule</h4>
+              <div class="afrow"><div class="af"><label>Monday</label><input id="f_mon" value="10 AM – 9 PM"></div><div class="af"><label>Tuesday</label><input id="f_tue" value="10 AM – 9 PM"></div></div>
+              <div class="afrow"><div class="af"><label>Wednesday</label><input id="f_wed" value="10 AM – 9 PM"></div><div class="af"><label>Thursday</label><input id="f_thu" value="10 AM – 9 PM"></div></div>
+              <div class="afrow"><div class="af"><label>Friday</label><input id="f_fri" value="Closed" style="color:#e94560"></div><div class="af"><label>Saturday</label><input id="f_sat" value="10 AM – 9 PM"></div></div>
+              <div class="afrow"><div class="af"><label>Sunday</label><input id="f_sun" value="10 AM – 9 PM"></div><div class="af"></div></div>
+            </div>
+            <div class="fcard"><h4>Hero Card</h4>
+              <div class="afrow"><div class="af"><label>Open Today Text</label><input id="f_today" value="10 AM – 9 PM"></div><div class="af"><label>Closed Badge</label><input id="f_closed" value="Friday Closed"></div></div>
+            </div>
+          </div>
+
+          <!-- MENU -->
+          <div class="admin-sec" id="a-menu">
+            <h3>Menu Items</h3><p class="sub">Add, edit, or remove items</p>
+            <div class="fcard"><h4>All Items</h4>
+              <div style="overflow-x:auto"><table class="mtbl"><thead><tr><th>Name</th><th>Description</th><th>Price</th><th>Cat</th><th>Tag</th><th></th></tr></thead><tbody id="mBody"></tbody></table></div>
+              <button class="btn-add" onclick="addMI()">+ Add New Item</button>
+            </div>
+          </div>
+
+          <!-- CONTACT -->
+          <div class="admin-sec" id="a-contact">
+            <h3>Contact Info</h3><p class="sub">Update your contact details</p>
+            <div class="fcard"><h4>Location</h4>
+              <div class="af"><label>Address</label><input id="f_addr" value="42 GS Road, Paltan Bazaar, Guwahati, Assam 781008"></div>
+            </div>
+            <div class="fcard"><h4>Communication</h4>
+              <div class="afrow"><div class="af"><label>Phone</label><input id="f_phone" value="+91 123 456 7890"></div><div class="af"><label>Email</label><input id="f_email" value="hello@frothandfrolic.com"></div></div>
+              <div class="afrow"><div class="af"><label>Instagram</label><input id="f_ig" value="@frothandfrolic"></div><div class="af"><label>Facebook</label><input id="f_fb" value="Froth & Frolic"></div></div>
+            </div>
+          </div>
+
+          <!-- ABOUT -->
+          <div class="admin-sec" id="a-about">
+            <h3>About Page</h3><p class="sub">Edit your story and team</p>
+            <div class="fcard"><h4>Our Story</h4>
+              <div class="af"><label>Story Title</label><input id="f_stitle" value="Where Comfort Meets Cappuccino"></div>
+              <div class="af"><label>Paragraph 1</label><textarea id="f_s1">What started as a shared love for great coffee and warm spaces became something Guwahati didn't have yet: a café that felt like a second home. Not pretentious. Not rushed. Just genuine.</textarea></div>
+              <div class="af"><label>Paragraph 2</label><textarea id="f_s2">The first week, we served 23 people. By the end of the first month, we had regulars who'd come every single day.</textarea></div>
+              <div class="af"><label>Paragraph 3</label><textarea id="f_s3">Today, Froth & Frolic is more than a café — it's a community hub, a creative workspace, a meeting ground, and a place where the barista knows your name and your order.</textarea></div>
+            </div>
+            <div class="fcard"><h4>Team</h4>
+              <div class="afrow"><div class="af"><label>Member 1 Name</label><input id="f_t1n" value="Meera Borah"></div><div class="af"><label>Role</label><input id="f_t1r" value="Co-Founder & Head Roaster"></div></div>
+              <div class="afrow"><div class="af"><label>Member 2 Name</label><input id="f_t2n" value="Arjun Kalita"></div><div class="af"><label>Role</label><input id="f_t2r" value="Co-Founder & Head Chef"></div></div>
+              <div class="afrow"><div class="af"><label>Member 3 Name</label><input id="f_t3n" value="Disha Phukan"></div><div class="af"><label>Role</label><input id="f_t3r" value="Lead Barista & Latte Artist"></div></div>
+              <div class="afrow"><div class="af"><label>Member 4 Name</label><input id="f_t4n" value="Karan Saikia"></div><div class="af"><label>Role</label><input id="f_t4r" value="Vibe Curator & Operations"></div></div>
+            </div>
+          </div>
+
+          <!-- PASSWORD -->
+          <div class="admin-sec" id="a-password">
+            <h3>Change Password</h3><p class="sub">Update your admin password</p>
+            <div class="fcard"><h4>Set New Password</h4>
+              <div class="af"><label>Current Password</label><input type="password" id="f_cp"></div>
+              <div class="af"><label>New Password</label><input type="password" id="f_np"></div>
+              <div class="af"><label>Confirm New Password</label><input type="password" id="f_cnp"></div>
+              <button class="btn-save" onclick="chPass()" style="margin-top:0.5rem">Update Password</button>
+              <div id="pMsg" style="margin-top:0.8rem;font-size:0.85rem"></div>
+            </div>
+          </div>
+
+          <!-- PUBLISH -->
+          <div class="admin-sec" id="a-publish">
+            <h3>Publish Changes 🚀</h3><p class="sub">Download updated website and upload to GitHub</p>
+            <div class="fcard"><h4>How it works</h4>
+              <ol style="padding-left:1.5rem;color:#ccc;line-height:2">
+                <li>Click <strong>"Download Updated Site"</strong> below</li>
+                <li>A new <code style="background:#0f3460;padding:0.2rem 0.5rem;border-radius:4px">index.html</code> file will download</li>
+                <li>Go to <a href="https://github.com/forex98cry-gif/frothandfrolic" target="_blank" style="color:#e94560">your GitHub repo</a></li>
+                <li>Click on <strong>index.html</strong> → ✏️ Edit → Select all → Replace</li>
+                <li>Paste the new code → <strong>Commit changes</strong></li>
+                <li>Done! Changes live in 2-3 minutes ✅</li>
+              </ol>
+            </div>
+            <div class="fcard" style="text-align:center;padding:3rem">
+              <div style="font-size:3rem;margin-bottom:1rem">📦</div>
+              <h3 style="color:#fff;margin-bottom:0.5rem">Ready to Publish?</h3>
+              <p style="color:#888;margin-bottom:2rem">All your changes will be bundled into a new index.html file</p>
+              <button class="btn-dl" onclick="dlSite()" style="font-size:1.1rem;padding:1rem 3rem">⬇️ Download Updated Site</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="save-bar">
+        <div class="st" id="sSt">Changes not saved</div>
+        <div class="bgrp"><button class="btn-save" onclick="saveAll()">💾 Save</button><button class="btn-dl" onclick="dlSite()">🚀 Publish</button></div>
+      </div>
+    </div>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ===== PAGE NAVIGATION =====
+function showPage(page) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelectorAll('.nav-links a[data-page]').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === page);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Close mobile menu
+  document.querySelector('.nav-links').classList.remove('open');
+  // Re-observe animations
+  setTimeout(initAnimations, 100);
+}
+
+// ===== MOBILE MENU =====
+function toggleMenu() {
+  document.querySelector('.nav-links').classList.toggle('open');
+}
+
+// ===== NAVBAR SCROLL =====
+window.addEventListener('scroll', () => {
+  const navbar = document.querySelector('.navbar');
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ===== SCROLL ANIMATIONS =====
+function initAnimations() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => observer.observe(el));
+}
+initAnimations();
+
+// ===== MENU FILTER =====
+document.querySelectorAll('.menu-cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.menu-cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.category;
+    document.querySelectorAll('.menu-item').forEach(item => {
+      if (cat === 'all' || item.dataset.category === cat) {
+        item.style.display = 'flex';
+        item.style.animation = 'fadeInUp 0.4s ease forwards';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+});
+
+// ===== STATS COUNTER =====
+const statsRow = document.querySelector('.stats-row');
+if (statsRow) {
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.querySelectorAll('.stat-number').forEach(counter => {
+          const target = parseInt(counter.dataset.count);
+          const suffix = counter.dataset.suffix || '';
+          const duration = 2000;
+          const step = target / (duration / 16);
+          let current = 0;
+          const update = () => {
+            current += step;
+            if (current < target) { counter.textContent = Math.floor(current) + suffix; requestAnimationFrame(update); }
+            else counter.textContent = target + suffix;
+          };
+          update();
+        });
+        statsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  statsObserver.observe(statsRow);
+}
+
+// ===== CONTACT FORM =====
+function handleFormSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('formBtn');
+  btn.textContent = 'Sent! ✓';
+  btn.style.background = 'var(--sage)';
+  setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; e.target.reset(); }, 2500);
+}
+
+// ===== PARALLAX =====
+window.addEventListener('scroll', () => {
+  document.querySelectorAll('.hero-bg-shape').forEach((shape, i) => {
+    shape.style.transform = `translateY(${window.scrollY * (i + 1) * 0.05}px)`;
+  });
+});
+
+// ===== ANIMATION KEYFRAME =====
+const style = document.createElement('style');
+style.textContent = '@keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }';
+document.head.appendChild(style);
+
+// ===== ADMIN PANEL =====
+const DPASS = 'froth2024';
+function gPass() { return localStorage.getItem('ff_pass') || DPASS; }
+
+function adminLogin() {
+  if (document.getElementById('aPass').value === gPass()) {
+    document.getElementById('adminLogin').style.display = 'none';
+    document.getElementById('adminPanel').style.display = 'block';
+    sessionStorage.setItem('ff_in', '1');
+    loadAData();
+  } else {
+    document.getElementById('aErr').style.display = 'block';
+    document.getElementById('aPass').value = '';
+  }
+}
+function adminLogout() {
+  sessionStorage.removeItem('ff_in');
+  document.getElementById('adminPanel').style.display = 'none';
+  document.getElementById('adminLogin').style.display = 'flex';
+  document.getElementById('aPass').value = '';
+}
+// Auto-login
+if (sessionStorage.getItem('ff_in') === '1') {
+  document.getElementById('adminLogin').style.display = 'none';
+  document.getElementById('adminPanel').style.display = 'block';
+}
+
+function aNav(id) {
+  document.querySelectorAll('.admin-sec').forEach(s => s.classList.remove('active'));
+  document.getElementById('a-' + id).classList.add('active');
+  document.querySelectorAll('.admin-sidebar a').forEach(a => a.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function chPass() {
+  const c = document.getElementById('f_cp').value, n = document.getElementById('f_np').value, cn = document.getElementById('f_cnp').value, m = document.getElementById('pMsg');
+  if (c !== gPass()) { m.textContent = '❌ Wrong current password'; m.style.color = '#e94560'; return; }
+  if (n.length < 4) { m.textContent = '❌ Min 4 characters'; m.style.color = '#e94560'; return; }
+  if (n !== cn) { m.textContent = '❌ Passwords don\'t match'; m.style.color = '#e94560'; return; }
+  localStorage.setItem('ff_pass', n);
+  m.textContent = '✅ Password updated!'; m.style.color = '#4ecca3';
+  document.getElementById('f_cp').value = ''; document.getElementById('f_np').value = ''; document.getElementById('f_cnp').value = '';
+}
+
+// Menu data
+let mItems = [
+  {n:'Classic Espresso',d:'Double shot, perfectly extracted. Bold, rich, unapologetic.',p:'₹149',c:'coffee',t:'Bestseller'},
+  {n:'Velvet Cappuccino',d:'Silky foam, rich espresso, a dusting of cocoa.',p:'₹199',c:'coffee',t:''},
+  {n:'Flat White',d:'Microfoam meets espresso in velvety harmony.',p:'₹219',c:'coffee',t:'Staff Pick'},
+  {n:'Indulgent Mocha',d:'Belgian chocolate, espresso, steamed milk.',p:'₹249',c:'coffee',t:''},
+  {n:'Cold Brew',d:'Steeped for 18 hours. Smooth, bold, refreshing.',p:'₹229',c:'coffee',t:''},
+  {n:'Affogato',d:'Vanilla gelato drowned in hot espresso. Pure bliss.',p:'₹279',c:'coffee',t:''},
+  {n:'Ceremonial Matcha Latte',d:'Ceremonial grade matcha whisked with oat milk.',p:'₹259',c:'tea',t:'Popular'},
+  {n:'Masala Chai',d:'House-blend spices, slow-simmered with fresh ginger.',p:'₹129',c:'tea',t:''},
+  {n:'Iced Matcha Lemonade',d:'Matcha meets citrus. Most refreshing.',p:'₹239',c:'tea',t:''},
+  {n:'Chamomile Bloom',d:'Organic chamomile with lavender and honey.',p:'₹159',c:'tea',t:''},
+  {n:'Butter Croissant',d:'72-hour laminated dough. 48 layers of perfection.',p:'₹149',c:'pastry',t:'Bestseller'},
+  {n:'Cinnamon Roll',d:'Warm, gooey, swirled with cinnamon and cream cheese glaze.',p:'₹179',c:'pastry',t:''},
+  {n:'Sourdough Toast',d:'House-baked sourdough with cultured butter & jam.',p:'₹129',c:'pastry',t:''},
+  {n:'Banana Bread',d:'Moist, walnut-studded, with a caramelized top.',p:'₹159',c:'pastry',t:''},
+  {n:'Seasonal Special',d:'Our rotating seasonal latte. Ask your barista!',p:'₹289',c:'special',t:'Limited'},
+  {n:'Coffee Tasting Flight',d:'3 single-origin pour-overs with tasting notes.',p:'₹449',c:'special',t:''},
+  {n:'Weekend Brunch Box',d:'Croissant, fruit bowl, yogurt, and any drink. Sat-Sun only.',p:'₹499',c:'special',t:''},
+  {n:'Wellness Shot',d:'Turmeric, ginger, lemon, honey, black pepper.',p:'₹99',c:'special',t:''},
+];
+
+function rMT() {
+  const tb = document.getElementById('mBody'); tb.innerHTML = '';
+  mItems.forEach((it, i) => {
+    tb.innerHTML += '<tr><td><input value="'+it.n+'" onchange="mItems['+i+'].n=this.value"></td><td><input value="'+it.d+'" onchange="mItems['+i+'].d=this.value"></td><td><input value="'+it.p+'" onchange="mItems['+i+'].p=this.value" style="width:75px"></td><td><select onchange="mItems['+i+'].c=this.value"><option value="coffee"'+(it.c==='coffee'?' selected':'')+'>Coffee</option><option value="tea"'+(it.c==='tea'?' selected':'')+'>Tea</option><option value="pastry"'+(it.c==='pastry'?' selected':'')+'>Pastry</option><option value="special"'+(it.c==='special'?' selected':'')+'>Special</option></select></td><td><input value="'+it.t+'" onchange="mItems['+i+'].t=this.value" style="width:80px"></td><td><button class="btn-del" onclick="delMI('+i+')">✕</button></td></tr>';
+  });
+}
+function addMI() { mItems.push({n:'New Item',d:'Description',p:'₹199',c:'coffee',t:''}); rMT(); }
+function delMI(i) { if(confirm('Delete "'+mItems[i].n+'"?')) { mItems.splice(i,1); rMT(); } }
+
+function gv(id) { const e=document.getElementById(id); return e?e.value:''; }
+function sv(id,v) { const e=document.getElementById(id); if(e) e.value=v; }
+
+function saveAll() {
+  const d = {};
+  ['f_tagline','f_title1','f_title2','f_title3','f_heroDesc','f_f1i','f_f1t','f_f1d','f_f2i','f_f2t','f_f2d','f_f3i','f_f3t','f_f3d','f_s1n','f_s1l','f_s2n','f_s2l','f_s3n','f_s3l','f_s4n','f_s4l','f_mon','f_tue','f_wed','f_thu','f_fri','f_sat','f_sun','f_today','f_closed','f_addr','f_phone','f_email','f_ig','f_fb','f_stitle','f_s1','f_s2','f_s3','f_t1n','f_t1r','f_t2n','f_t2r','f_t3n','f_t3r','f_t4n','f_t4r'].forEach(id => { d[id]=gv(id); });
+  d.menu = mItems;
+  localStorage.setItem('ff_data', JSON.stringify(d));
+  const s = document.getElementById('sSt'); s.textContent = '✅ Saved!'; s.className = 'st ok';
+  setTimeout(() => { s.textContent = 'All changes saved'; }, 2000);
+}
+
+function loadAData() {
+  const saved = localStorage.getItem('ff_data');
+  if(saved) { const d=JSON.parse(saved); Object.keys(d).forEach(k => { if(k==='menu'){mItems=d[k];}else{sv(k,d[k]);} }); }
+  rMT();
+}
+
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+
+function dlSite() {
+  saveAll();
+  // Build the full site HTML with admin data injected
+  const d = {};
+  ['f_tagline','f_title1','f_title2','f_title3','f_heroDesc','f_f1i','f_f1t','f_f1d','f_f2i','f_f2t','f_f2d','f_f3i','f_f3t','f_f3d','f_s1n','f_s1l','f_s2n','f_s2l','f_s3n','f_s3l','f_s4n','f_s4l','f_mon','f_tue','f_wed','f_thu','f_fri','f_sat','f_sun','f_today','f_closed','f_addr','f_phone','f_email','f_ig','f_fb','f_stitle','f_s1','f_s2','f_s3','f_t1n','f_t1r','f_t2n','f_t2r','f_t3n','f_t3r','f_t4n','f_t4r'].forEach(id => { d[id]=gv(id); });
+
+  const mHTML = mItems.map(it => {
+    const tg = it.t ? '<span class="menu-item-tag">'+esc(it.t)+'</span>' : '';
+    const imgs = {coffee:'photo-1510707577719-ae7c14805e3a',tea:'photo-1556881286-fc6915169721',pastry:'photo-1555507036-ab1f4038024a',special:'photo-1510707577719-ae7c14805e3a'};
+    return '<div class="menu-item fade-in" data-category="'+it.c+'"><img class="menu-item-img" src="https://images.unsplash.com/'+(imgs[it.c]||imgs.coffee)+'?w=120&h=120&fit=crop" alt="'+esc(it.n)+'"><div class="menu-item-info"><div class="menu-item-name">'+esc(it.n)+' '+tg+'</div><div class="menu-item-desc">'+esc(it.d)+'</div></div><div class="menu-item-price">'+esc(it.p)+'</div></div>';
+  }).join('');
+
+  // Get current page HTML and replace content sections
+  const html = document.documentElement.outerHTML;
+  // We'll just download the current page as-is (with admin panel included)
+  const blob = new Blob([html], {type:'text/html'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'index.html';
+  a.click();
+}
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a23b55bc9f9d3500',t:'MTc4NTQ4NzYxMA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
